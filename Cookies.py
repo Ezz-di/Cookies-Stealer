@@ -22,7 +22,7 @@ class Cookies:
         cookie_file = (
             "~/Library/Application Support/Google/Chrome/Default/Cookies"
         )
-        browser = "chrome"
+        browser = "Chrome"
         setting = {
             "my_pass": keyring.get_password(
                 "{} Safe Storage".format(browser), browser
@@ -32,7 +32,7 @@ class Cookies:
         }
         return setting
 
-    def _hosts_generators(hostname: str) -> Iterator[str]:
+    def _hosts_generators(self, hostname: str) -> Iterator[str]:
         """ 
         All possible cases
         """
@@ -89,16 +89,13 @@ class Cookies:
             cookie_file = str(pathlib.Path(cookie_file).expanduser())
         else:
             cookie_file = str(pathlib.Path(setting["cookie_file"]).expanduser())
-        
-        
+                
         if isinstance(password, bytes):
             setting["my_pass"] = password
         elif isinstance(password, str):
             setting["my_pass"] = password.encode("utf8")
         elif isinstance(setting["my_pass"], str):
             setting["my_pass"] = setting["my_pass"].encode("utf8")
-
-
         
 
         enc_key = PBKDF2(
@@ -107,7 +104,6 @@ class Cookies:
             dkLen=setting["length"],
             salt=setting["salt"],
         )
-
         parsed_url = urllib.parse.urlparse(url)
         if parsed_url.scheme:
             domain = parsed_url.netloc
@@ -163,6 +159,7 @@ class Cookies:
         return cookies
 
     def run(self):
+        print("hello world")
         cookies = self.get_cookies(self.url_cookies)
         print(cookies)
 
@@ -172,5 +169,5 @@ class Cookies:
 
 
 
-c = Cookies("www.linkedin.com")
+c = Cookies("http://www.linkedin.com")
 c.run()
