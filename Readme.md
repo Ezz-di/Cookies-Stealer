@@ -1,37 +1,33 @@
 This is a mini Cookie Stealer, it only works with MACOSX, CHROME.
 
-<br />
-<br />
-<br />
 **sytem & navigator**
-<br />
+<br>
   System : macOS catalina 10.15.7
-  <br />
+  <br>
   Navigator : Google Chrome
-<br />
+
 **Requirement**
-<br />
+<br>
   python 3.9
-  <br />
+  <br>
   pip3
-<br />
+
 **Environment**
-<br />
-<br />
+<br>
+<br>
 Before you start set up your environment using the command bellow
-<br />
+<br>
   > python3 -m venv name_env
-<br />
+<br>
 And install the packages:
-<br />
+<br>
   > pip install -r requirements.txt
-<br />
 **Launch the script**
-<br />
+<br>
 Activate the environment . env/bin/activate
-<br />
+<br>
 Launch the script with this command
-<br />
+<br>
 
   > python Cookies.py
 <br>
